@@ -7,10 +7,8 @@ fi
 
 # Setup home environment
 
-export PATH=/usr/local/bin:/opt/miniconda/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/lib64:/usr/local/lib:/opt/miniconda/lib:$LD_LIBRARY_PATH
-export LIBRARY_PATH=/usr/local/lib64:/usr/local/lib:/opt/miniconda/lib:$LIBRARY_PATH
-export INCLUDE=/opt/miniconda/include:$INCLUDE
+export LD_LIBRARY_PATH=/usr/local/lib64:/usr/local/lib:/opt/miniconda/lib64:/opt/miniconda/lib:$LD_LIBRARY_PATH
+export LIBRARY_PATH=/usr/local/lib64:/usr/local/lib:/opt/miniconda/lib64:/opt/miniconda/lib:$LIBRARY_PATH
 export CXXFLAGS="${CXXFLAGS} -Wabi=2"
 
 if [ $ABI -lt 5 ]; then
@@ -27,12 +25,16 @@ echo "alias anaconda_setup='clone_anaconda && cd anaconda && python setup.py dev
 if [[ "$ARCH" -eq "64" || -z "$ARCH" ]]; then
     ARCH_DOC=$'To build 32-bit code, set the ARCH environment
         variable to 32. (-e \"ARCH=32\" docker argument)'
+    export PATH=/opt/miniconda64/bin:$PATH
+    export INCLUDE=/opt/miniconda64/include:$INCLUDE
 else
     ARCH_DOC=$'Pretending to be i686 (using multilib gcc) and
         filtering uname to output i686.'
     export CFLAGS="${CFLAGS} -m32"
     export CXXFLAGS="${CXXFLAGS} -m32"
     export CONDA_FORCE_32BIT=1
+    export PATH=/opt/miniconda/bin:$PATH
+    export INCLUDE=/opt/miniconda/include:$INCLUDE
     # this will get picked up by subshells
     sudo mv /bin/uname /bin/uname_x64
     sudo ln -s /opt/share/alias_32bit.sh /bin/uname
