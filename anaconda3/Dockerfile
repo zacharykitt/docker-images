@@ -27,7 +27,7 @@ RUN apt-get install -y curl grep sed dpkg && \
     apt-get clean
 
 # non-essential build
-RUN apt-get install -y tmux
+RUN apt-get install -y tmux vim
 
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
 CMD [ "/bin/bash" ]

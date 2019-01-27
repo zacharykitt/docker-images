@@ -22,7 +22,7 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.12-Linux-x86
     echo "conda activate base" >> ~/.bashrc
 
 # non-essential build
-RUN apt-get install -y tmux
+RUN apt-get install -y tmux vim
 
 ENV TINI_VERSION v0.16.1
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
