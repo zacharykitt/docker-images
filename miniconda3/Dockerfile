@@ -5,6 +5,7 @@ FROM debian:latest
 #  $ docker push continuumio/miniconda3:latest
 #  $ docker push continuumio/miniconda3:4.5.12
 
+ENV TERM xterm-256color
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 
